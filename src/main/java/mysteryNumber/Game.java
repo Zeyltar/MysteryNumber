@@ -1,6 +1,7 @@
 package mysteryNumber;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
 	private static Game instance;
@@ -18,6 +19,16 @@ public class Game {
 
 		instance = new Game();
 		instance.guesser = new Player(nb);
+	}
+	
+	public static void autoStart() {
+		Scanner sc = new Scanner(System.in);
+		int num = sc.nextInt();
+		sc.close();
+		Number nb = new Number(num);
+		
+		instance = new Game();
+		instance.guesser = new Computer(nb);
 	}
 
 }
