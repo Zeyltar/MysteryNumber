@@ -7,14 +7,13 @@ public class Computer extends Guesser {
 	private String[] clueList;
 	private Number[] numberList;
 
-	public Computer(Number nb) {
+	public Computer() {
 		clueList = new String[Game.MAX_ATTEMPT];
 		numberList = new Number[Game.MAX_ATTEMPT];
-		guess(nb);
 	}
 
 	@Override
-	protected void guess(Number n2) {
+	public void guess(Number n2) {
 		numberList[Game.attemptCount] = new Number(new Random().nextInt((9999 - 1000) + 1) + 1000);
 		clueList[Game.attemptCount] = getClue(numberList[Game.attemptCount], n2);
 		Game.attemptCount++;

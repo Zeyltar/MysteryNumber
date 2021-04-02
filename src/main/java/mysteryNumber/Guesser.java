@@ -2,7 +2,7 @@ package mysteryNumber;
 
 public abstract class Guesser {
 	
-	protected void guess(Number n2) {
+	public void guess(Number n2) {
 		
 	}
 	
