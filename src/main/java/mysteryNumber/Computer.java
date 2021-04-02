@@ -15,23 +15,27 @@ public class Computer extends Guesser {
 	@Override
 	public void guess(Number n2) {
 		numberList[Game.attemptCount] = new Number(new Random().nextInt((9999 - 1000) + 1) + 1000);
+		System.out.println("Tentative n." + (Game.attemptCount + 1) + ": " + numberList[Game.attemptCount].toString());
 		clueList[Game.attemptCount] = getClue(numberList[Game.attemptCount], n2);
 		Game.attemptCount++;
 
 		while (Game.attemptCount < Game.MAX_ATTEMPT) {
 			int num = analyze();
 			numberList[Game.attemptCount] = new Number(num);
+			System.out.println("Tentative n." + Game.attemptCount + ": " + numberList[Game.attemptCount].toString());
 			clueList[Game.attemptCount] = getClue(numberList[Game.attemptCount], n2);
 
 			if (isFilledByChar(clueList[Game.attemptCount], '=')) {
-				System.out.println("Bonne reponse");
+				System.out.println("L'ordinateur a eu la bonne reponse");
 				break;
 			}
 			Game.attemptCount++;
 		}
+		
 		if (Game.attemptCount >= Game.MAX_ATTEMPT)
-			System.out.println("Nombre de tentative maximale atteint");
+			System.out.println("Nombre de tentative maximale atteint\nL'ordinateur a perdu :(");
 
+		Game.getInstance().menu();
 	}
 
 	// Vérifier pour chaque digits du Number précédent, la relation entre celui-ci
@@ -40,7 +44,7 @@ public class Computer extends Guesser {
 	protected int analyze() {
 		int num = 0;
 		int length = numberList[Game.attemptCount - 1].value.length - 1;
-		
+
 		for (int i = length; i >= 0; i--) {
 			if (clueList[Game.attemptCount - 1].charAt(i) == '=') {
 				num += Math.pow(10, length - i) * numberList[Game.attemptCount - 1].value[i];

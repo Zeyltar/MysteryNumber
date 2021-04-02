@@ -21,21 +21,24 @@ public class Game {
 		return instance;
 	}
 
-	public void start() {
-		System.out.println("Un nombre a ete genere, essayez de le deviner :)");
-		Number nb = new Number(new Random().nextInt((9999 - 1000) + 1) + 1000);
-		Game.attemptCount = 0;
-		guesser = new Player();
-		guesser.guess(nb);
-	}
+	public void start(int choice) {
+		if (choice == 1) {
+			System.out.println("Un nombre a ete genere, essayez de le deviner :)");
+			Number nb = new Number(new Random().nextInt((9999 - 1000) + 1) + 1000);
+			
+			Game.attemptCount = 0;
+			guesser = new Player();
+			guesser.guess(nb);
+		} else if (choice == 2) {
+			System.out.println("Entrer un nombre a faire deviner a l'ordinateur :)");
+			int num = Game.sc.nextInt();
+			Number nb = new Number(num);
+			
+			Game.attemptCount = 0;
+			guesser = new Computer();
+			guesser.guess(nb);
+		}
 
-	public void autoStart() {
-		int num = Game.sc.nextInt();
-		Game.attemptCount = 0;
-
-		Number nb = new Number(num);
-		guesser = new Computer();
-		guesser.guess(nb);
 	}
 
 	public void menu() {
@@ -52,10 +55,8 @@ public class Game {
 
 		switch (choice) {
 		case 1:
-			start();
-			break;
 		case 2:
-			autoStart();
+			start(choice);
 			break;
 		case 3:
 			quit();
